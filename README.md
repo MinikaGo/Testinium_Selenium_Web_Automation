@@ -40,8 +40,8 @@ Web Servis Otomasyon
   konfigurasyon dosyasına eklenmelidir.
   Github güvenlik nedeniyle engellemiştir.
 
-##### trl_key = api key
-##### trl_token = api token
+##### ApiKey = trello api key
+##### ApiToken = trello api token
 
 Trello Rest-Api Test Senaryo Adımları
 - trelloRestApiTest() @Test metodu ile aşağıdaki test adımları gerçekleştirilmiştir.
