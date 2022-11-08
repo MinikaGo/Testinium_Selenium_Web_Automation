@@ -12,24 +12,19 @@ import java.util.Random;
 
 public class HomePage {
 
+    @FindBy(how = How.XPATH, using = "//img[contains(@class,'header__logo')]")
+    public WebElement COMMON_LOGO;
+    @FindBy(how = How.XPATH, using = "//input[@class='default-input o-header__search--input']")
+    public WebElement txtbx_searchBox;
+    @FindBy(how = How.XPATH, using = "//button[@id='onetrust-accept-btn-handler']")
+    public WebElement btn_acceptCookies;
+    @FindAll(@FindBy(how = How.XPATH, using = "//div[contains(@class,'o-productList__itemWrapper')]"))
+    public List<WebElement> productListWrapper;
+    private WebElement randomElement;
+    private Random random = new Random();
     public HomePage() {
         PageFactory.initElements(DriverFactory.getInstance().getDriver(), this);
     }
-
-    @FindBy(how = How.XPATH, using = "//img[contains(@class,'header__logo')]")
-    public WebElement COMMON_LOGO;
-
-    @FindBy(how = How.XPATH, using = "//input[@class='default-input o-header__search--input']")
-    public WebElement txtbx_searchBox;
-
-    @FindBy(how = How.XPATH, using = "//button[@id='onetrust-accept-btn-handler']")
-    public WebElement btn_acceptCookies;
-
-    @FindAll(@FindBy(how = How.XPATH, using = "//div[contains(@class,'o-productList__itemWrapper')]"))
-    public List<WebElement> productListWrapper;
-
-    private WebElement randomElement;
-    private Random random = new Random();
 
     public void open(String url) {
         DriverFactory.getInstance().getDriver().get(url);

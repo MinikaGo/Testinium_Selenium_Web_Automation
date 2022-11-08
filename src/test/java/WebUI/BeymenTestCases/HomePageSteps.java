@@ -7,8 +7,11 @@ import WebUI.utils.BrowserFactory;
 import WebUI.utils.ConfigReader;
 import WebUI.utils.DriverFactory;
 import common.operations.ExcelReader;
-import common.operations.TextFileOperations;
-import org.junit.jupiter.api.*;
+import common.operations.TextLogger;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -20,8 +23,8 @@ public class HomePageSteps extends AbstractStep {
     ProductPage productPage = new ProductPage();
     CartPage cartPage = new CartPage();
 
-    @BeforeAll
-    static void setupClass() {
+    @BeforeClass
+    public static void setupClass() {
         BrowserFactory bf = new BrowserFactory();
         DriverFactory.getInstance().setDriver(bf.createBrowserInstance());
         DriverFactory.getInstance().getDriver();
@@ -29,13 +32,8 @@ public class HomePageSteps extends AbstractStep {
         DriverFactory.getInstance().getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
-    @BeforeEach
-    void setupTest() {
-
-    }
-
-    @AfterEach
-    void teardown() {
+    @AfterClass
+    public static void teardown() {
         DriverFactory.getInstance().closeBrowser();
     }
 
@@ -87,7 +85,9 @@ public class HomePageSteps extends AbstractStep {
         //        - Ürün sayfasındaki fiyat ile sepette yer alan ürün fiyatının doğruluğu karşılaştırılır.
         cartPage.open();
         Thread.sleep(650);
-        Assertions.assertEquals(TextFileOperations.getProductPrice(), cartPage.span_summary__Value.getText());
+
+        TextLogger textLogger = new TextLogger("Beymen");
+        Assertions.assertEquals(textLogger.getBeymenProductPrice(), cartPage.span_summary__Value.getText());
 
         //- Adet arttırılarak ürün adedinin 2 olduğu doğrulanır.
         selectElementFromDropDown(cartPage.select_quantitySelect, "2 adet");

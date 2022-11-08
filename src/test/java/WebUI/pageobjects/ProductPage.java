@@ -1,7 +1,7 @@
 package WebUI.pageobjects;
 
 import WebUI.utils.DriverFactory;
-import common.operations.TextFileOperations;
+import common.operations.TextLogger;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -15,29 +15,23 @@ import java.util.Random;
 
 public class ProductPage {
 
+    @FindBy(how = How.XPATH, using = "//h1[@class='o-productDetail__title']//a")
+    public WebElement h1_productDetail__title;
+    @FindBy(how = How.XPATH, using = "//h1[@class='o-productDetail__title']//span")
+    public WebElement h1_productDetail__description;
+    @FindBy(how = How.XPATH, using = "//div[@class='m-price__list']//ins[@id='priceNew']")
+    public WebElement h1_productPrice;
+    @FindBy(how = How.XPATH, using = "//a[@title='Sepetim']")
+    public WebElement a_myBasket;
+    @FindAll(@FindBy(how = How.XPATH, using = "//div[@class='m-variation']//span[not(contains(@class,'disabled'))]"))
+    public List<WebElement> variationsList;
+    @FindBy(how = How.XPATH, using = "//button[@id='addBasket']")
+    public WebElement btn_addBasket;
+    private Random random = new Random();
+
     public ProductPage() {
         PageFactory.initElements(DriverFactory.getInstance().getDriver(), this);
     }
-
-    @FindBy(how = How.XPATH, using = "//h1[@class='o-productDetail__title']//a")
-    public WebElement h1_productDetail__title;
-
-    @FindBy(how = How.XPATH, using = "//h1[@class='o-productDetail__title']//span")
-    public WebElement h1_productDetail__description;
-
-    @FindBy(how = How.XPATH, using = "//div[@class='m-price__list']//ins[@id='priceNew']")
-    public WebElement h1_productPrice;
-
-    @FindBy(how = How.XPATH, using = "//a[@title='Sepetim']")
-    public WebElement a_myBasket;
-
-    @FindAll(@FindBy(how = How.XPATH, using = "//div[@class='m-variation']//span[not(contains(@class,'disabled'))]"))
-    public List<WebElement> variationsList;
-
-    @FindBy(how = How.XPATH, using = "//button[@id='addBasket']")
-    public WebElement btn_addBasket;
-
-    private Random random = new Random();
 
     public void saveProductDetailsToTextFile() throws IOException {
 
@@ -45,8 +39,8 @@ public class ProductPage {
         String productDescription = h1_productDetail__description.getText();
         String productPrice = h1_productPrice.getText();
 
-        TextFileOperations.writeToTextFile(productName, productDescription, productPrice);
-
+        TextLogger textLogger = new TextLogger("Beymen");
+        textLogger.beymenTextLogger(productName, productDescription, productPrice);
     }
 
     public void addSelectedProductToBasket() {

@@ -18,8 +18,7 @@ public class BrowserFactory {
         RemoteWebDriver driver = null;
 
         switch (ConfigReader.getProperties("browser")) {
-
-            case "chrome":
+            case "chrome" -> {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
                 Map<String, Object> prefs = new HashMap<String, Object>();
@@ -27,15 +26,15 @@ public class BrowserFactory {
                 options.setExperimentalOption("prefs", prefs);
                 //options.addArguments("--incognito");
                 driver = new ChromeDriver(options);
-                break;
-            case "edge":
+            }
+            case "edge" -> {
                 WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
-                break;
-            case "firefox":
+            }
+            case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
-                break;
+            }
         }
 
         return driver;
