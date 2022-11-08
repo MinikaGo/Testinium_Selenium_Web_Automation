@@ -51,9 +51,4 @@ Trello Rest-Api Test Senaryo Adımları
 - Oluşturduğunuz kartları siliniz.
 - Oluşturduğunuz board’ u siliniz.
 
-
-<<<<<<< HEAD
 * İletişim : usinanoglu@gmail.com
-=======
-* İletişim : usinanoglu@gmail.com
->>>>>>> origin/master
